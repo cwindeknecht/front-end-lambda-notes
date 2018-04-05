@@ -35,7 +35,7 @@ class Login extends React.Component {
           <h1 className="new-header"> No Account? Create One Below </h1>
           <label> Username </label>
           <input placeholder="username" value={this.state.newUser} onChange={this.handleNewUserChange} />
-          <label> Username (Must Be At Least 8 Characters)</label>
+          <label> Password</label>
           <input
             type="password"
             placeholder="password"
@@ -46,6 +46,7 @@ class Login extends React.Component {
             {' '}
             Create New{' '}
           </button>
+          <label> (Must Be At Least 8 Characters) </label>
         </div>
       </div>
     );

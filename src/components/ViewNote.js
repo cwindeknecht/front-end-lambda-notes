@@ -113,5 +113,3 @@ export default connect(mapStateToProps, {
   load_notes,
   view_button_click,
 })(ViewNote);
-
-console.log('Deployment is a joke');
