@@ -107,4 +107,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { edit_note_clicked, delete_note, load_notes, view_button_click })(ViewNote);
+export default connect(mapStateToProps, {
+  edit_note_clicked,
+  delete_note,
+  load_notes,
+  view_button_click,
+})(ViewNote);
+
+console.log('Deployment is a joke');
