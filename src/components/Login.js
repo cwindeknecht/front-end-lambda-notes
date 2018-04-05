@@ -42,11 +42,11 @@ class Login extends React.Component {
             value={this.state.newPass}
             onChange={this.handleNewPassChange}
           />
+          <label> (Must Be At Least 8 Characters) </label>
           <button className="login-button" onClick={this.createClicked}>
             {' '}
             Create New{' '}
           </button>
-          <label> (Must Be At Least 8 Characters) </label>
         </div>
       </div>
     );
