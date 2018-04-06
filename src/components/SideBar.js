@@ -77,7 +77,7 @@ class SideBar extends React.Component {
   handleLogOut = (event) => {
     event.preventDefault();
     axios
-      .post('http://localhost:3000/notes/logout/' + this.props.currentUser)
+      .post('https://pure-sands-16313.herokuapp.com/notes/logout/' + this.props.currentUser)
       .then(() => {
         this.props.handle_log_out();
       })

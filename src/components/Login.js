@@ -114,7 +114,7 @@ class Login extends React.Component {
             var instance = axios.create();
             instance.defaults.headers.common['Authorization'] = data.data.token;
             const userID = data.data.user._id;
-            axios.get('http://localhost:3000/notes/' + userID).then((notes) => {
+            axios.get('https://pure-sands-16313.herokuapp.com/notes/' + userID).then((notes) => {
               this.props.user_login(userID, notes);
               return;
             });
