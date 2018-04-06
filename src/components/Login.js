@@ -35,14 +35,13 @@ class Login extends React.Component {
           <h1 className="new-header"> No Account? Create One Below </h1>
           <label> Username </label>
           <input placeholder="username" value={this.state.newUser} onChange={this.handleNewUserChange} />
-          <label> Password</label>
+          <label> Username (Must Be At Least 8 Characters)</label>
           <input
             type="password"
             placeholder="password"
             value={this.state.newPass}
             onChange={this.handleNewPassChange}
           />
-          <label> (Must Be At Least 8 Characters) </label>
           <button className="login-button" onClick={this.createClicked}>
             {' '}
             Create New{' '}
@@ -70,25 +69,23 @@ class Login extends React.Component {
       this.setState({ user: '', pass: '' });
     } else if (this.state.pass.length < 8) {
       alert('Your password is at least 8 characters.');
-      this.setState({pass: '' });
-    }
-      else {
+      this.setState({ pass: '' });
+    } else {
       event.preventDefault();
       const user = {
         username: this.state.user,
         password: this.state.pass,
       };
       axios
-        .post('http://localhost:3000/notes/login', user)
+        .post('https://pure-sands-16313.herokuapp.com/notes/login', user)
         .then((data) => {
           var instance = axios.create();
           instance.defaults.headers.common['Authorization'] = data.data.token;
           const userID = data.data.user._id;
-          axios.get('http://localhost:3000/notes/' + userID)
-          .then(notes => {
+          axios.get('https://pure-sands-16313.herokuapp.com/notes/' + userID).then((notes) => {
             this.props.user_login(userID, notes);
             return;
-          })
+          });
         })
         .catch((error) => {
           alert('You Entered An Incorrect Username or Password.');
@@ -111,10 +108,17 @@ class Login extends React.Component {
         password: this.state.newPass,
       };
       axios
-        .post('http://localhost:3000/notes/createuser', newUser)
+        .post('https://pure-sands-16313.herokuapp.com/notes/createuser', newUser)
         .then((data) => {
-          const userID = data.data.user._id;
-          this.props.new_user_creation(userID);
+          axios.post('https://pure-sands-16313.herokuapp.com/notes/login', newUser).then((data) => {
+            var instance = axios.create();
+            instance.defaults.headers.common['Authorization'] = data.data.token;
+            const userID = data.data.user._id;
+            axios.get('http://localhost:3000/notes/' + userID).then((notes) => {
+              this.props.user_login(userID, notes);
+              return;
+            });
+          });
         })
         .catch((error) => {
           alert('Username already exists, please try again');

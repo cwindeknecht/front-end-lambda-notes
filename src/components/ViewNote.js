@@ -5,11 +5,11 @@ import axios from 'axios';
 
 import CheckList from './CheckList';
 
-import { edit_note_clicked, delete_note, load_notes, view_button_click } from '../actions/index';
+import { edit_note_clicked, load_notes, view_button_click } from '../actions/index';
 
 import './css/ViewNote.css';
 
-const ROUTE = 'http://localhost:3000/notes/';
+const ROUTE = 'https://pure-sands-16313.herokuapp.com/notes/';
 
 class ViewNote extends React.Component {
   state = {
@@ -107,9 +107,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  edit_note_clicked,
-  delete_note,
-  load_notes,
-  view_button_click,
-})(ViewNote);
+export default connect(mapStateToProps, { edit_note_clicked, load_notes, view_button_click })(ViewNote);

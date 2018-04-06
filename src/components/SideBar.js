@@ -9,12 +9,12 @@ import {
   sort_button_click,
   download_button_click,
   handle_log_out,
-  load_notes
+  load_notes,
 } from '../actions/index';
 
 import './css/SideBar.css';
 
-const ROUTE = 'http://localhost:3000/notes/';
+const ROUTE = 'https://pure-sands-16313.herokuapp.com/notes/';
 
 class SideBar extends React.Component {
   render() {
@@ -54,13 +54,14 @@ class SideBar extends React.Component {
   };
 
   handleView = () => {
-    axios.get(`${ROUTE}${this.props.currentUser}`)
-    .then(data => {
-      this.props.view_button_click(data.data.foundNotes);
-    })
-    .catch(error => {
-      console.log('Error Loading Notes');
-    })
+    axios
+      .get(`${ROUTE}${this.props.currentUser}`)
+      .then((data) => {
+        this.props.view_button_click(data.data.foundNotes);
+      })
+      .catch((error) => {
+        alert('Error Loading Notes');
+      });
   };
 
   handleSearch = () => {
@@ -75,17 +76,18 @@ class SideBar extends React.Component {
   };
   handleLogOut = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:3000/notes/logout/' + this.props.currentUser)
-    .then(() => {
-      this.props.handle_log_out();
-    })
-    .catch(error => {
-      alert('Error Logging Out.')
-    })
+    axios
+      .post('http://localhost:3000/notes/logout/' + this.props.currentUser)
+      .then(() => {
+        this.props.handle_log_out();
+      })
+      .catch((error) => {
+        alert('Error Logging Out.');
+      });
   };
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     current: state.current,
     currentUser: state.currentUser,
